@@ -1,5 +1,11 @@
 package ar.com.practica2026.ICS6030.repository;
 
-public interface TipoLicenciaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import ar.com.practica2026.ICS6030.entity.TipoLicencia;
+
+@Repository
+public interface TipoLicenciaRepository extends JpaRepository<TipoLicencia, Long> {
 
 }
