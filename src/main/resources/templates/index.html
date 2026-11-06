@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Inicio - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+	<!-- Menú (común a todas las vistas) -->
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<!-- Contenido propio de esta página -->
+	<main class="flex-shrink-0">
+		<div class="container py-4">
+
+			<div class="p-4 mb-4 bg-light rounded-3">
+				<h1 class="display-6">Sistema de Gestión Docente</h1>
+				<p class="lead mb-0">Instituto de Carreras Superiores N° 6030 - Las Lajitas</p>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-md-6 col-lg-3">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title">Docentes</h5>
+							<p class="card-text">Alta, búsqueda y datos del personal docente.</p>
+							<a th:href="@{/docentes}" class="btn btn-primary">Ingresar</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title">Académico</h5>
+							<p class="card-text">Carreras, materias y horarios.</p>
+							<a th:href="@{/materias}" class="btn btn-primary">Ingresar</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title">Asistencia</h5>
+							<p class="card-text">Registro y consulta de asistencia del personal.</p>
+							<a th:href="@{/asistencias}" class="btn btn-primary">Ingresar</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title">Licencias</h5>
+							<p class="card-text">Solicitudes y tipos de licencia.</p>
+							<a th:href="@{/licencias}" class="btn btn-primary">Ingresar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+
+	<!-- Pie de página (común a todas las vistas) -->
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
