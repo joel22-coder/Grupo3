@@ -16,7 +16,7 @@ public class Carrera {
 	@Column(name = "id_carrera")
 	private Long idCarrera;
 
-	@Column(name = "nombre", length = 40, nullable = false)
+	@Column(name = "nombre", length = 100, nullable = false)
 	private String nombre;
 
 	@Column(name = "duracion", nullable = false)
