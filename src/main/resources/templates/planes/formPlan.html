@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Plan de estudio - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4" style="max-width: 600px;">
+
+			<h1 class="h3 mb-3">Datos del plan de estudio</h1>
+
+			<form th:action="@{/planes/guardar}" th:object="${plan}" method="post">
+
+				<input type="hidden" th:field="*{idPlan}">
+
+				<div class="mb-3">
+					<label for="nombre" class="form-label">Nombre</label>
+					<input type="text" class="form-control" th:field="*{nombre}"
+						   required maxlength="40">
+				</div>
+
+				<div class="mb-3">
+					<label for="anio" class="form-label">Año de aprobación</label>
+					<input type="number" class="form-control" th:field="*{anio}"
+						   required min="2000" max="2099">
+				</div>
+
+				<button type="submit" class="btn btn-success">Guardar</button>
+				<a th:href="@{/planes}" class="btn btn-secondary">Cancelar</a>
+
+			</form>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
