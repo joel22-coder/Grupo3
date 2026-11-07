@@ -24,20 +24,30 @@ public class Materia {
 	@Column(name = "horas_semanales", nullable = false)
 	private Integer horasSemanales;
 
+	@Column(name = "curso", nullable = false)
+	private Integer curso;
+
+	// "Anual" / "1º cuatrimestre" / "2º cuatrimestre"
+	@Column(name = "tipo_cursado", length = 15, nullable = false)
+	private String tipoCursado = "Anual";
+
 	@ManyToOne
-	@JoinColumn(name = "id_carrera", nullable = false)
-	private Carrera carrera;
+	@JoinColumn(name = "id_plan", nullable = false)
+	private PlanEstudio planEstudio;
 
 	public Materia() {
 		super();
 	}
 
-	public Materia(Long idMateria, String nombre, Integer horasSemanales, Carrera carrera) {
+	public Materia(Long idMateria, String nombre, Integer horasSemanales, Integer curso, String tipoCursado,
+			PlanEstudio planEstudio) {
 		super();
 		this.idMateria = idMateria;
 		this.nombre = nombre;
 		this.horasSemanales = horasSemanales;
-		this.carrera = carrera;
+		this.curso = curso;
+		this.tipoCursado = tipoCursado;
+		this.planEstudio = planEstudio;
 	}
 
 	public Long getIdMateria() {
@@ -64,14 +74,30 @@ public class Materia {
 		this.horasSemanales = horasSemanales;
 	}
 
-	public Carrera getCarrera() {
-		return carrera;
+	public Integer getCurso() {
+		return curso;
 	}
 
-	public void setCarrera(Carrera carrera) {
-		this.carrera = carrera;
+	public void setCurso(Integer curso) {
+		this.curso = curso;
 	}
 
+	public String getTipoCursado() {
+		return tipoCursado;
+	}
+
+	public void setTipoCursado(String tipoCursado) {
+		this.tipoCursado = tipoCursado;
+	}
+
+	public PlanEstudio getPlanEstudio() {
+		return planEstudio;
+	}
+
+	public void setPlanEstudio(PlanEstudio planEstudio) {
+		this.planEstudio = planEstudio;
+	}
+	
 	
 	
 }
