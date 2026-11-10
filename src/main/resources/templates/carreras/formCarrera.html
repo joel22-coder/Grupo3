@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Carrera - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4" style="max-width: 600px;">
+
+			<h1 class="h3 mb-3">Datos de la carrera</h1>
+
+			<form th:action="@{/carreras/guardar}" th:object="${carrera}" method="post">
+
+				<input type="hidden" th:field="*{idCarrera}">
+
+				<div class="mb-3">
+					<label for="nombre" class="form-label">Nombre</label>
+					<input type="text" class="form-control" th:field="*{nombre}">
+				</div>
+
+				<div class="mb-3">
+					<label for="duracion" class="form-label">Duración (años)</label>
+					<input type="number" class="form-control" th:field="*{duracion}"
+						   required min="1" max="9">
+				</div>
+
+				<button type="submit" class="btn btn-success">Guardar</button>
+				<a th:href="@{/carreras}" class="btn btn-secondary">Cancelar</a>
+
+			</form>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
