@@ -27,18 +27,23 @@ public class Docente {
 	
 	@Column(name = "cuit")
 	private Long cuit;
+	
+	// "Activo" / "Inactivo". La baja del docente es lógica: no se borra la fila.
+	@Column(name = "estado", length = 8, nullable = false)
+	private String estado = "Activo";
 
 	public Docente() {
 		super();
 	}
 
-	public Docente(Long idDocente, Integer dni, String nombre, String apellido, Long cuit) {
+	public Docente(Long idDocente, Integer dni, String nombre, String apellido, Long cuit, String estado) {
 		super();
 		this.idDocente = idDocente;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cuit = cuit;
+		this.estado = estado;
 	}
 
 	public Long getIdDocente() {
@@ -79,6 +84,14 @@ public class Docente {
 
 	public void setCuit(Long cuit) {
 		this.cuit = cuit;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	
