@@ -16,6 +16,10 @@ public class TipoLicencia {
 	@Column(name = "id_tipo")
 	private Long idTipo;
 
+	// Número de artículo del regimen de licencias (ej.: 22), separado de la descripción
+	@Column(name = "articulo", nullable = false, unique = true)
+	private Integer articulo;
+	
 	@Column(name = "descripcion", length = 150, nullable = false)
 	private String descripcion;
 
@@ -30,9 +34,11 @@ public class TipoLicencia {
 		super();
 	}
 
-	public TipoLicencia(Long idTipo, String descripcion, Integer diasMaximos, String requiereCertificado) {
+	public TipoLicencia(Long idTipo, Integer articulo, String descripcion, Integer diasMaximos,
+			String requiereCertificado) {
 		super();
 		this.idTipo = idTipo;
+		this.articulo = articulo;
 		this.descripcion = descripcion;
 		this.diasMaximos = diasMaximos;
 		this.requiereCertificado = requiereCertificado;
@@ -44,6 +50,14 @@ public class TipoLicencia {
 
 	public void setIdTipo(Long idTipo) {
 		this.idTipo = idTipo;
+	}
+
+	public Integer getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(Integer articulo) {
+		this.articulo = articulo;
 	}
 
 	public String getDescripcion() {
@@ -69,7 +83,7 @@ public class TipoLicencia {
 	public void setRequiereCertificado(String requiereCertificado) {
 		this.requiereCertificado = requiereCertificado;
 	}
-	
+
 	
 	
 }
