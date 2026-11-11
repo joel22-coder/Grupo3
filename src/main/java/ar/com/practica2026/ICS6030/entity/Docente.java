@@ -10,24 +10,24 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "docente")
 public class Docente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_docente")
 	private Long idDocente;
-	
+
 	@Column(name = "dni", nullable = false, unique = true)
 	private Integer dni;
-	
+
 	@Column(name = "nombre", length = 30, nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "apellido", length = 30, nullable = false)
 	private String apellido;
-	
+
 	@Column(name = "cuit")
 	private Long cuit;
-	
+
 	// "Activo" / "Inactivo". La baja del docente es lógica: no se borra la fila.
 	@Column(name = "estado", length = 8, nullable = false)
 	private String estado = "Activo";
@@ -94,6 +94,4 @@ public class Docente {
 		this.estado = estado;
 	}
 
-	
-	
 }

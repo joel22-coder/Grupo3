@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "asistencia")
 public class Asistencia {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_asistencia")
@@ -100,7 +100,5 @@ public class Asistencia {
 	public void setHorario(Horario horario) {
 		this.horario = horario;
 	}
-	
-	
-	
+
 }
