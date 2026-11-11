@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Materia - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4" style="max-width: 600px;">
+
+			<h1 class="h3 mb-3">Datos de la materia</h1>
+
+			<form th:action="@{/materias/guardar}" th:object="${materia}" method="post">
+
+				<input type="hidden" th:field="*{idMateria}">
+
+				<div class="mb-3">
+					<label for="planEstudio.idPlan" class="form-label">Plan de estudio</label>
+					<select class="form-select" th:field="*{planEstudio.idPlan}" required>
+						<option value="">Seleccione un plan</option>
+						<option th:each="p : ${planes}" th:value="${p.idPlan}"
+								th:text="${p.nombre + ' - ' + p.carrera.nombre}"></option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="codigo" class="form-label">Código</label>
+					<input type="text" class="form-control" th:field="*{codigo}"
+						   required maxlength="6" placeholder="Ej: 1.13">
+				</div>
+
+				<div class="mb-3">
+					<label for="nombre" class="form-label">Nombre</label>
+					<input type="text" class="form-control" th:field="*{nombre}"
+						   required maxlength="30">
+				</div>
+
+				<div class="mb-3">
+					<label for="curso" class="form-label">Año (curso)</label>
+					<input type="number" class="form-control" th:field="*{curso}"
+						   required min="1" max="9">
+				</div>
+
+				<div class="mb-3">
+					<label for="tipoCursado" class="form-label">Tipo de cursado</label>
+					<select class="form-select" th:field="*{tipoCursado}" required>
+						<option value="Anual">Anual</option>
+						<option value="1º cuatrimestre">1º cuatrimestre</option>
+						<option value="2º cuatrimestre">2º cuatrimestre</option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="horasSemanales" class="form-label">Horas semanales</label>
+					<input type="number" class="form-control" th:field="*{horasSemanales}"
+						   required min="1" max="30">
+				</div>
+
+				<button type="submit" class="btn btn-success">Guardar</button>
+				<a th:href="@{/materias}" class="btn btn-secondary">Cancelar</a>
+
+			</form>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "licencia")
 public class Licencia {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_licencia")
@@ -112,7 +112,5 @@ public class Licencia {
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
-	
-	
 
 }
