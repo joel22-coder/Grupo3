@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Correlativas - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4">
+
+			<h1 class="h3 mb-1">Correlativas</h1>
+			<p class="text-muted mb-3">
+				<span th:text="${materia.codigo}"></span> - <span th:text="${materia.nombre}"></span>
+			</p>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Código</th>
+						<th>Materia correlativa</th>
+						<th class="text-end">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${correlativas.isEmpty()}">
+						<td colspan="3" class="text-muted">Esta materia no tiene correlativas.</td>
+					</tr>
+					<tr th:each="c : ${correlativas}">
+						<td th:text="${c.correlativa.codigo}"></td>
+						<td th:text="${c.correlativa.nombre}"></td>
+						<td class="text-end">
+							<form th:action="@{/correlativas/eliminar/{id}(id=${c.idCorrelatividad})}"
+								  method="post" class="d-inline">
+								<button type="submit" class="btn btn-sm btn-outline-danger">Quitar</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2 class="h5 mt-4">Agregar correlativa</h2>
+			<form th:action="@{/correlativas/guardar}" th:object="${correlatividad}" method="post">
+
+				<input type="hidden" th:field="*{materia.idMateria}">
+
+				<div class="mb-3">
+					<select class="form-select" th:field="*{correlativa.idMateria}" required>
+						<option value="">Seleccione una materia del mismo plan</option>
+						<option th:each="m : ${materiasDelPlan}" th:if="${m.idMateria != materia.idMateria}"
+								th:value="${m.idMateria}" th:text="${m.codigo + ' - ' + m.nombre}"></option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-success">Agregar</button>
+				<a th:href="@{/materias}" class="btn btn-secondary">Volver</a>
+
+			</form>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

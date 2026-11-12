@@ -1,5 +1,8 @@
 package ar.com.practica2026.ICS6030.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,6 +43,14 @@ public class Materia {
 	@ManyToOne
 	@JoinColumn(name = "id_plan", nullable = false)
 	private PlanEstudio planEstudio;
+
+	// sus correlativas
+	@OneToMany(mappedBy = "materia", cascade = CascadeType.REMOVE)
+	private List<Correlatividad> correlativas;
+
+	// las materias de las que ella es correlativa
+	@OneToMany(mappedBy = "correlativa", cascade = CascadeType.REMOVE)
+	private List<Correlatividad> esCorrelativaDe;
 
 	public Materia() {
 		super();
@@ -110,6 +122,22 @@ public class Materia {
 
 	public void setPlanEstudio(PlanEstudio planEstudio) {
 		this.planEstudio = planEstudio;
+	}
+
+	public List<Correlatividad> getCorrelativas() {
+		return correlativas;
+	}
+
+	public void setCorrelativas(List<Correlatividad> correlativas) {
+		this.correlativas = correlativas;
+	}
+
+	public List<Correlatividad> getEsCorrelativaDe() {
+		return esCorrelativaDe;
+	}
+
+	public void setEsCorrelativaDe(List<Correlatividad> esCorrelativaDe) {
+		this.esCorrelativaDe = esCorrelativaDe;
 	}
 
 }
