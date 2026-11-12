@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ar.com.practica2026.ICS6030.entity.PlanEstudio;
-import ar.com.practica2026.ICS6030.service.CarreraService;        
+import ar.com.practica2026.ICS6030.service.CarreraService;
 import ar.com.practica2026.ICS6030.service.PlanEstudioService;
 
 @Controller
@@ -16,12 +16,11 @@ import ar.com.practica2026.ICS6030.service.PlanEstudioService;
 public class PlanEstudioController {
 
 	private final PlanEstudioService planEstudioService;
-	private final CarreraService carreraService;                   
+	private final CarreraService carreraService;
 
-	public PlanEstudioController(PlanEstudioService planEstudioService,
-			CarreraService carreraService) {              
+	public PlanEstudioController(PlanEstudioService planEstudioService, CarreraService carreraService) {
 		this.planEstudioService = planEstudioService;
-		this.carreraService = carreraService;                      
+		this.carreraService = carreraService;
 	}
 
 	@GetMapping
@@ -33,14 +32,14 @@ public class PlanEstudioController {
 	@GetMapping("/nuevo")
 	public String nuevo(Model model) {
 		model.addAttribute("plan", new PlanEstudio());
-		model.addAttribute("carreras", carreraService.listarTodas());  
+		model.addAttribute("carreras", carreraService.listarTodas());
 		return "planes/formPlan";
 	}
 
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("plan", planEstudioService.buscarPorId(id));
-		model.addAttribute("carreras", carreraService.listarTodas()); 
+		model.addAttribute("carreras", carreraService.listarTodas());
 		return "planes/formPlan";
 	}
 

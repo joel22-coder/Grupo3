@@ -9,9 +9,8 @@ import ar.com.practica2026.ICS6030.repository.PlanEstudioRepository;
 import ar.com.practica2026.ICS6030.service.PlanEstudioService;
 
 @Service
-public class PlanEstudioServiceImpl implements PlanEstudioService{
+public class PlanEstudioServiceImpl implements PlanEstudioService {
 
-	
 	private final PlanEstudioRepository planEstudioRepository;
 
 	public PlanEstudioServiceImpl(PlanEstudioRepository planEstudioRepository) {
