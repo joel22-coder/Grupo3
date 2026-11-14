@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Detalle del plan - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4">
+
+			<div class="d-flex justify-content-between align-items-center mb-3">
+				<h1 class="h3 mb-0" th:text="${plan.nombre}">Plan</h1>
+				<a th:href="@{/planes}" class="btn btn-secondary">Volver</a>
+			</div>
+
+			<p class="mb-1"><strong>Carrera:</strong> <span th:text="${plan.carrera.nombre}"></span></p>
+			<p class="mb-1"><strong>Duración:</strong> <span th:text="${plan.carrera.duracion}"></span> años</p>
+			<p class="mb-3"><strong>Año de aprobación:</strong> <span th:text="${plan.anio}"></span></p>
+
+			<h2 class="h5">Materias</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Año</th>
+						<th>Código</th>
+						<th>Materia</th>
+						<th>Cursado</th>
+						<th>Horas sem.</th>
+						<th>Correlativas</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${materias.isEmpty()}">
+						<td colspan="6" class="text-muted">Este plan todavía no tiene materias cargadas.</td>
+					</tr>
+					<tr th:each="m : ${materias}">
+						<td th:text="${m.curso}"></td>
+						<td th:text="${m.codigo}"></td>
+						<td th:text="${m.nombre}"></td>
+						<td th:text="${m.tipoCursado}"></td>
+						<td th:text="${m.horasSemanales}"></td>
+						<td>
+							<span th:each="c : ${correlatividades}" th:if="${c.materia.idMateria == m.idMateria}"
+								class="badge text-bg-secondary me-1" th:text="${c.correlativa.codigo}"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

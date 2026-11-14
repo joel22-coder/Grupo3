@@ -1,4 +1,4 @@
-package ar.com.practica2026.ICS6030.service.implement;
+package ar.com.practica2026.ICS6030.serviceimplement;
 
 import java.util.List;
 
