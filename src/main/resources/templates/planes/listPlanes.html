@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Planes de estudio - Gestión Docente</title>
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
+
 <body class="d-flex flex-column h-100">
 
 	<header th:insert="~{fragments/menu :: menu-principal}"></header>
@@ -23,23 +25,25 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Año</th>
-						<th>Carrera</th>                                   
+						<th>Carrera</th>
 						<th class="text-end">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:if="${planes.isEmpty()}">
-						<td colspan="4" class="text-muted">No hay planes de estudio cargados.</td>  
+						<td colspan="4" class="text-muted">No hay planes de estudio cargados.</td>
 					</tr>
 					<tr th:each="p : ${planes}">
 						<td th:text="${p.nombre}"></td>
 						<td th:text="${p.anio}"></td>
-						<td th:text="${p.carrera.nombre}"></td>             
+						<td th:text="${p.carrera.nombre}"></td>
 						<td class="text-end">
+						<td class="text-end">
+							<a th:href="@{/planes/detalle/{id}(id=${p.idPlan})}"
+								class="btn btn-sm btn-outline-secondary">Ver detalle</a>
 							<a th:href="@{/planes/editar/{id}(id=${p.idPlan})}"
-							   class="btn btn-sm btn-outline-primary">Editar</a>
-							<form th:action="@{/planes/eliminar/{id}(id=${p.idPlan})}"
-								  method="post" class="d-inline">
+								class="btn btn-sm btn-outline-primary">Editar</a>
+							<form th:action="@{/planes/eliminar/{id}(id=${p.idPlan})}" method="post" class="d-inline">
 								<button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
 							</form>
 						</td>
@@ -54,4 +58,5 @@
 
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
+
 </html>
