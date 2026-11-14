@@ -12,11 +12,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "materia")
 public class Materia {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_materia")
 	private Long idMateria;
+
+	// Código de la materia en el plan de estudio, ej: "1.13"
+	@Column(name = "codigo", length = 6, nullable = false)
+	private String codigo;
 
 	@Column(name = "nombre", length = 30, nullable = false)
 	private String nombre;
@@ -24,6 +28,7 @@ public class Materia {
 	@Column(name = "horas_semanales", nullable = false)
 	private Integer horasSemanales;
 
+	// Año de la carrera en que se dicta: 1, 2, 3...
 	@Column(name = "curso", nullable = false)
 	private Integer curso;
 
@@ -39,10 +44,11 @@ public class Materia {
 		super();
 	}
 
-	public Materia(Long idMateria, String nombre, Integer horasSemanales, Integer curso, String tipoCursado,
-			PlanEstudio planEstudio) {
+	public Materia(Long idMateria, String codigo, String nombre, Integer horasSemanales, Integer curso,
+			String tipoCursado, PlanEstudio planEstudio) {
 		super();
 		this.idMateria = idMateria;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.horasSemanales = horasSemanales;
 		this.curso = curso;
@@ -56,6 +62,14 @@ public class Materia {
 
 	public void setIdMateria(Long idMateria) {
 		this.idMateria = idMateria;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNombre() {
@@ -97,7 +111,5 @@ public class Materia {
 	public void setPlanEstudio(PlanEstudio planEstudio) {
 		this.planEstudio = planEstudio;
 	}
-	
-	
-	
+
 }

@@ -16,10 +16,11 @@ public class TipoLicencia {
 	@Column(name = "id_tipo")
 	private Long idTipo;
 
-	// Número de artículo del regimen de licencias (ej.: 22), separado de la descripción
+	// Número de artículo del regimen de licencias (ej.: 22), separado de la
+	// descripción
 	@Column(name = "articulo", nullable = false, unique = true)
 	private Integer articulo;
-	
+
 	@Column(name = "descripcion", length = 150, nullable = false)
 	private String descripcion;
 
@@ -84,6 +85,4 @@ public class TipoLicencia {
 		this.requiereCertificado = requiereCertificado;
 	}
 
-	
-	
 }
