@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Docente - Gestión Docente</title>
+
+    <link th:href="@{/css/bootstrap.min.css}"
+          rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <!-- MENÚ PRINCIPAL -->
+    <header th:insert="~{fragments/menu :: menu-principal}">
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="flex-shrink-0">
+
+        <div class="container py-4"
+             style="max-width: 600px;">
+
+            <!-- TÍTULO -->
+            <h1 class="h3 mb-3">
+                Datos del docente
+            </h1>
+
+            <!-- MENSAJE DE ERROR -->
+            <div class="alert alert-danger"
+                 th:if="${error}"
+                 th:text="${error}">
+            </div>
+
+            <!-- FORMULARIO -->
+            <form th:action="@{/docentes/guardar}"
+                  th:object="${docente}"
+                  method="post">
+
+                <!-- CAMPOS OCULTOS -->
+                <input type="hidden"
+                       th:field="*{idDocente}">
+
+                <input type="hidden"
+                       th:field="*{estado}">
+
+                <!-- APELLIDO -->
+                <div class="mb-3">
+
+                    <label for="apellido"
+                           class="form-label">
+                        Apellido
+                    </label>
+
+                    <input type="text"
+                           id="apellido"
+                           class="form-control"
+                           th:field="*{apellido}"
+                           required
+                           maxlength="30"
+                           pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+"
+                           title="Solo letras, espacios y tildes">
+
+                </div>
+
+                <!-- NOMBRE -->
+                <div class="mb-3">
+
+                    <label for="nombre"
+                           class="form-label">
+                        Nombre
+                    </label>
+
+                    <input type="text"
+                           id="nombre"
+                           class="form-control"
+                           th:field="*{nombre}"
+                           required
+                           maxlength="30"
+                           pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+"
+                           title="Solo letras, espacios y tildes">
+
+                </div>
+
+                <!-- DNI -->
+                <div class="mb-3">
+
+                    <label for="dni"
+                           class="form-label">
+                        DNI (sin puntos)
+                    </label>
+
+                    <input type="number"
+                           id="dni"
+                           class="form-control"
+                           th:field="*{dni}"
+                           required
+                           min="1000000"
+                           max="99999999">
+
+                </div>
+
+                <!-- CUIT / CUIL -->
+                <div class="mb-3">
+
+                    <label for="cuit"
+                           class="form-label">
+                        CUIT/CUIL (sin guiones, opcional)
+                    </label>
+
+                    <input type="number"
+                           id="cuit"
+                           class="form-control"
+                           th:field="*{cuit}"
+                           min="10000000000"
+                           max="99999999999">
+
+                </div>
+
+                <!-- BOTONES -->
+                <button type="submit"
+                        class="btn btn-success">
+                    Guardar
+                </button>
+
+                <a th:href="@{/docentes}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer mt-auto py-3 bg-light"
+            th:insert="~{fragments/footer :: pie-pagina}">
+    </footer>
+
+    <!-- BOOTSTRAP -->
+    <script th:src="@{/js/bootstrap.min.js}">
+    </script>
+
+</body>
+</html>
