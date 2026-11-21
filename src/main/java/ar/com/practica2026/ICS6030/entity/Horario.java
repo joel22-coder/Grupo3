@@ -2,6 +2,8 @@ package ar.com.practica2026.ICS6030.entity;
 
 import java.time.LocalTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +26,11 @@ public class Horario {
 	@Column(name = "dia_semana", length = 9, nullable = false)
 	private String diaSemana;
 
+	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name = "hora_inicio", nullable = false)
 	private LocalTime horaInicio;
 
+	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name = "hora_fin", nullable = false)
 	private LocalTime horaFin;
 

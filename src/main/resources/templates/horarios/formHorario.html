@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Horario - Gestión Docente</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+	<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+	<main class="flex-shrink-0">
+		<div class="container py-4" style="max-width: 600px;">
+
+			<h1 class="h3 mb-3">Datos del horario</h1>
+
+			<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+			<form th:action="@{/horarios/guardar}" th:object="${horario}" method="post">
+
+				<input type="hidden" th:field="*{idHorario}">
+
+				<div class="mb-3">
+					<label for="materia.idMateria" class="form-label">Materia</label>
+					<select class="form-select" th:field="*{materia.idMateria}" required>
+						<option value="">Seleccione una materia</option>
+						<option th:each="m : ${materias}" th:value="${m.idMateria}"
+							th:text="${m.codigo + ' - ' + m.nombre + ' (' + m.planEstudio.nombre + ')'}"></option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="docente.idDocente" class="form-label">Docente</label>
+					<select class="form-select" th:field="*{docente.idDocente}" required>
+						<option value="">Seleccione un docente</option>
+						<option th:each="d : ${docentes}" th:value="${d.idDocente}"
+							th:text="${d.apellido + ', ' + d.nombre}"></option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="diaSemana" class="form-label">Día</label>
+					<select class="form-select" th:field="*{diaSemana}" required>
+						<option value="">Seleccione un día</option>
+						<option value="Lunes">Lunes</option>
+						<option value="Martes">Martes</option>
+						<option value="Miércoles">Miércoles</option>
+						<option value="Jueves">Jueves</option>
+						<option value="Viernes">Viernes</option>
+						<option value="Sábado">Sábado</option>
+					</select>
+				</div>
+
+				<div class="row">
+					<div class="col mb-3">
+						<label for="horaInicio" class="form-label">Hora de inicio</label>
+						<input type="time" class="form-control" th:field="*{horaInicio}" required>
+					</div>
+					<div class="col mb-3">
+						<label for="horaFin" class="form-label">Hora de fin</label>
+						<input type="time" class="form-control" th:field="*{horaFin}" required>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="estado" class="form-label">Estado</label>
+					<select class="form-select" th:field="*{estado}" required>
+						<option value="Activo">Activo</option>
+						<option value="Inactivo">Inactivo</option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-success">Guardar</button>
+				<a th:href="@{/horarios}" class="btn btn-secondary">Cancelar</a>
+
+			</form>
+
+		</div>
+	</main>
+
+	<footer class="footer mt-auto py-3 bg-light" th:insert="~{fragments/footer :: pie-pagina}"></footer>
+
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
