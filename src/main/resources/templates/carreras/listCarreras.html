@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Carreras - Gestión Docente</title>
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
+
 <body class="d-flex flex-column h-100">
 
 	<header th:insert="~{fragments/menu :: menu-principal}"></header>
@@ -17,7 +19,7 @@
 				<h1 class="h3 mb-0">Carreras</h1>
 				<a th:href="@{/carreras/nueva}" class="btn btn-primary">Nueva carrera</a>
 			</div>
-
+			<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -35,9 +37,9 @@
 						<td th:text="${c.duracion}"></td>
 						<td class="text-end">
 							<a th:href="@{/carreras/editar/{id}(id=${c.idCarrera})}"
-							   class="btn btn-sm btn-outline-primary">Editar</a>
-							<form th:action="@{/carreras/eliminar/{id}(id=${c.idCarrera})}"
-								  method="post" class="d-inline">
+								class="btn btn-sm btn-outline-primary">Editar</a>
+							<form th:action="@{/carreras/eliminar/{id}(id=${c.idCarrera})}" method="post"
+								class="d-inline">
 								<button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
 							</form>
 						</td>
@@ -52,4 +54,5 @@
 
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
+
 </html>

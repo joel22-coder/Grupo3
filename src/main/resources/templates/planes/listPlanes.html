@@ -19,6 +19,7 @@
 				<h1 class="h3 mb-0">Planes de estudio</h1>
 				<a th:href="@{/planes/nuevo}" class="btn btn-primary">Nuevo plan</a>
 			</div>
+			<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
 
 			<table class="table table-striped table-hover">
 				<thead>

@@ -34,11 +34,13 @@
 						<th>Cursado</th>
 						<th>Horas sem.</th>
 						<th>Correlativas</th>
+						<th>Horarios y docentes</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:if="${materias.isEmpty()}">
-						<td colspan="6" class="text-muted">Este plan todavía no tiene materias cargadas.</td>
+						<td colspan="7" class="text-muted">Este plan todavía no tiene materias cargadas.</td>
 					</tr>
 					<tr th:each="m : ${materias}">
 						<td th:text="${m.curso}"></td>
@@ -49,6 +51,14 @@
 						<td>
 							<span th:each="c : ${correlatividades}" th:if="${c.materia.idMateria == m.idMateria}"
 								class="badge text-bg-secondary me-1" th:text="${c.correlativa.codigo}"></span>
+						</td>
+						<td>
+							<div th:each="h : ${horarios}"
+								th:if="${h.materia.idMateria == m.idMateria and h.estado == 'Activo'}">
+								<span th:text="${h.diaSemana}"></span>
+								<span th:text="${h.horaInicio}"></span> a <span th:text="${h.horaFin}"></span>:
+								<span th:text="${h.docente.apellido + ', ' + h.docente.nombre}"></span>
+							</div>
 						</td>
 					</tr>
 				</tbody>
