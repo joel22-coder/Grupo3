@@ -13,6 +13,7 @@ import ar.com.practica2026.ICS6030.entity.Materia;
 import ar.com.practica2026.ICS6030.entity.PlanEstudio;
 import ar.com.practica2026.ICS6030.service.CarreraService;
 import ar.com.practica2026.ICS6030.service.CorrelatividadService;
+import ar.com.practica2026.ICS6030.service.HorarioService;
 import ar.com.practica2026.ICS6030.service.MateriaService;
 import ar.com.practica2026.ICS6030.service.PlanEstudioService;
 
@@ -24,13 +25,16 @@ public class PlanEstudioController {
 	private final CarreraService carreraService;
 	private final MateriaService materiaService;
 	private final CorrelatividadService correlatividadService;
+	private final HorarioService horarioService;
 
 	public PlanEstudioController(PlanEstudioService planEstudioService, CarreraService carreraService,
-			MateriaService materiaService, CorrelatividadService correlatividadService) {
+			MateriaService materiaService, CorrelatividadService correlatividadService, HorarioService horarioService) {
+		super();
 		this.planEstudioService = planEstudioService;
 		this.carreraService = carreraService;
 		this.materiaService = materiaService;
 		this.correlatividadService = correlatividadService;
+		this.horarioService = horarioService;
 	}
 
 	@GetMapping
@@ -60,6 +64,7 @@ public class PlanEstudioController {
 		model.addAttribute("plan", plan);
 		model.addAttribute("materias", materias);
 		model.addAttribute("correlatividades", correlatividadService.listarPorMaterias(materias));
+		model.addAttribute("horarios", horarioService.listarPorMaterias(materias));
 		return "planes/detallePlan";
 	}
 
@@ -70,7 +75,15 @@ public class PlanEstudioController {
 	}
 
 	@PostMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") Long id) {
+	public String eliminar(@PathVariable("id") Long id, Model model) {
+		PlanEstudio plan = planEstudioService.buscarPorId(id);
+		List<Materia> materias = materiaService.listarPorPlan(plan);
+		if (!horarioService.listarPorMaterias(materias).isEmpty()) {
+			model.addAttribute("error", "No se puede eliminar el plan " + plan.getNombre()
+					+ " porque tiene materias con horarios cargados.");
+			model.addAttribute("planes", planEstudioService.listarTodos());
+			return "planes/listPlanes";
+		}
 		planEstudioService.eliminar(id);
 		return "redirect:/planes";
 	}

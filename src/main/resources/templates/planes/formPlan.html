@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Plan de estudio - Gestión Docente</title>
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
+
 <body class="d-flex flex-column h-100">
 
 	<header th:insert="~{fragments/menu :: menu-principal}"></header>
@@ -21,16 +23,14 @@
 
 				<div class="mb-3">
 					<label for="nombre" class="form-label">Nombre</label>
-					<input type="text" class="form-control" th:field="*{nombre}"
-						   required maxlength="40">
+					<input type="text" class="form-control" th:field="*{nombre}" required maxlength="40">
 				</div>
 
 				<div class="mb-3">
 					<label for="anio" class="form-label">Año de aprobación</label>
-					<input type="number" class="form-control" th:field="*{anio}"
-						   required min="2000" max="2099">
+					<input type="number" class="form-control" th:field="*{anio}" required min="2000" max="2099">
 				</div>
-				
+
 				<div class="mb-3">
 					<label for="carrera.idCarrera" class="form-label">Carrera</label>
 					<select class="form-select" th:field="*{carrera.idCarrera}" required>
@@ -51,4 +51,5 @@
 
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
+
 </html>

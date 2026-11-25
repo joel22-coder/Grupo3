@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ar.com.practica2026.ICS6030.entity.Materia;
+import ar.com.practica2026.ICS6030.service.HorarioService;
 import ar.com.practica2026.ICS6030.service.MateriaService;
 import ar.com.practica2026.ICS6030.service.PlanEstudioService;
 
@@ -17,10 +18,14 @@ public class MateriaController {
 
 	private final MateriaService materiaService;
 	private final PlanEstudioService planEstudioService;
+	private final HorarioService horarioService;
 
-	public MateriaController(MateriaService materiaService, PlanEstudioService planEstudioService) {
+	public MateriaController(MateriaService materiaService, PlanEstudioService planEstudioService,
+			HorarioService horarioService) {
+		super();
 		this.materiaService = materiaService;
 		this.planEstudioService = planEstudioService;
+		this.horarioService = horarioService;
 	}
 
 	@GetMapping
@@ -50,7 +55,14 @@ public class MateriaController {
 	}
 
 	@PostMapping("/eliminar/{id}")
-	public String eliminar(@PathVariable("id") Long id) {
+	public String eliminar(@PathVariable("id") Long id, Model model) {
+		Materia materia = materiaService.buscarPorId(id);
+		if (!horarioService.listarPorMateria(materia).isEmpty()) {
+			model.addAttribute("error",
+					"No se puede eliminar " + materia.getNombre() + " porque tiene horarios cargados.");
+			model.addAttribute("materias", materiaService.listarTodas());
+			return "materias/listMaterias";
+		}
 		materiaService.eliminar(id);
 		return "redirect:/materias";
 	}
