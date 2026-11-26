@@ -1,3 +1,4 @@
+
 package ar.com.practica2026.ICS6030.entity;
 
 import java.time.LocalDate;
@@ -15,90 +16,76 @@ import jakarta.persistence.Table;
 @Table(name = "asistencia")
 public class Asistencia {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_asistencia")
-	private Long idAsistencia;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_asistencia")
+    private Long idAsistencia;
 
-	@Column(name = "fecha", nullable = false)
-	private LocalDate fecha;
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
 
-	// "Presente" / "Ausente"
-	@Column(name = "estado", length = 8, nullable = false)
-	private String estado;
+    // Presente / Ausente / Justificado
+    @Column(name = "estado", length = 15, nullable = false)
+    private String estado;
 
-	@Column(name = "observacion", length = 200)
-	private String observacion;
+    @Column(name = "observacion", length = 255)
+    private String observacion;
 
-	@ManyToOne
-	@JoinColumn(name = "id_docente", nullable = false)
-	private Docente docente;
+    @ManyToOne
+    @JoinColumn(name = "id_docente", nullable = false)
+    private Docente docente;
 
-	@ManyToOne
-	@JoinColumn(name = "id_horario", nullable = false)
-	private Horario horario;
+    public Asistencia() {
+        super();
+    }
 
-	public Asistencia() {
-		super();
-	}
+    public Asistencia(Long idAsistencia, LocalDate fecha,
+            String estado, String observacion, Docente docente) {
+        super();
+        this.idAsistencia = idAsistencia;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.observacion = observacion;
+        this.docente = docente;
+    }
 
-	public Asistencia(Long idAsistencia, LocalDate fecha, String estado, String observacion, Docente docente,
-			Horario horario) {
-		super();
-		this.idAsistencia = idAsistencia;
-		this.fecha = fecha;
-		this.estado = estado;
-		this.observacion = observacion;
-		this.docente = docente;
-		this.horario = horario;
-	}
+    public Long getIdAsistencia() {
+        return idAsistencia;
+    }
 
-	public Long getIdAsistencia() {
-		return idAsistencia;
-	}
+    public void setIdAsistencia(Long idAsistencia) {
+        this.idAsistencia = idAsistencia;
+    }
 
-	public void setIdAsistencia(Long idAsistencia) {
-		this.idAsistencia = idAsistencia;
-	}
+    public LocalDate getFecha() {
+        return fecha;
+    }
 
-	public LocalDate getFecha() {
-		return fecha;
-	}
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
 
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public String getObservacion() {
+        return observacion;
+    }
 
-	public String getObservacion() {
-		return observacion;
-	}
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
 
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
+    public Docente getDocente() {
+        return docente;
+    }
 
-	public Docente getDocente() {
-		return docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
-
-	public Horario getHorario() {
-		return horario;
-	}
-
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
-
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
 }
