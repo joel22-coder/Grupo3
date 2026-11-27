@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Asistencia - Gestión Docente</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+    <main class="flex-shrink-0">
+
+        <div class="container py-4" style="max-width: 600px;">
+
+            <h1 class="h3 mb-3"
+                th:text="${asistencia.idAsistencia == null
+                ? 'Registrar asistencia'
+                : 'Modificar asistencia'}">
+            </h1>
+
+            <div th:if="${error != null}"
+                 class="alert alert-danger"
+                 th:text="${error}">
+            </div>
+
+            <form th:action="@{/asistencias/guardar}"
+                  th:object="${asistencia}"
+                  method="post">
+
+                <input type="hidden" th:field="*{idAsistencia}">
+
+                <div class="mb-3">
+
+                    <label class="form-label">Docente</label>
+
+                    <select name="idDocente" class="form-select" required>
+
+                        <option value="">Seleccione un docente</option>
+
+                        <option th:each="d : ${docentes}"
+                                th:value="${d.idDocente}"
+                                th:text="${d.apellido + ', ' + d.nombre}"
+                                th:selected="${asistencia.docente != null
+                                and asistencia.docente.idDocente == d.idDocente}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Fecha</label>
+
+                    <input type="date"
+                           class="form-control"
+                           th:field="*{fecha}"
+                           required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Estado de asistencia</label>
+
+                    <select class="form-select"
+                            th:field="*{estado}"
+                            required>
+
+                        <option value="">Seleccione un estado</option>
+                        <option value="Presente">Presente</option>
+                        <option value="Ausente">Ausente</option>
+                        <option value="Justificado">Justificado</option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Observaciones</label>
+
+                    <textarea class="form-control"
+                              th:field="*{observacion}"
+                              rows="3"
+                              maxlength="255"
+                              placeholder="Ingrese alguna observación (opcional)">
+                    </textarea>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar
+                </button>
+
+                <a th:href="@{/asistencias}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-light"
+            th:insert="~{fragments/footer :: pie-pagina}">
+    </footer>
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
